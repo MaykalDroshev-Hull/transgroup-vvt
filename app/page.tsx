@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Truck, Package, Factory, Users, Clock, Globe, Check, Phone } from "lucide-react";
 
 export default function Home() {

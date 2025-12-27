@@ -9,7 +9,9 @@ export default function CookieBanner() {
     // Check if user has already accepted cookies
     const hasAccepted = localStorage.getItem("cookies-accepted");
     if (!hasAccepted) {
-      setIsVisible(true);
+      // Use setTimeout to avoid synchronous state update in effect
+      const timer = setTimeout(() => setIsVisible(true), 0);
+      return () => clearTimeout(timer);
     }
   }, []);
 
