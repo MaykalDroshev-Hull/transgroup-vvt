@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trans Group VVT - International Logistics & Spedition
+
+A modern, multilingual website for Trans Group VVT, a Bulgarian logistics and international freight company specializing in temperature-controlled transport, warehousing, and spedition services.
+
+## Features
+
+- 🌍 **Multilingual Support**: Bulgarian, English, Polish, and Greek
+- 🎨 **Modern UI**: Built with React, TypeScript, and Tailwind CSS
+- 📱 **Responsive Design**: Mobile-first approach
+- 🚀 **Fast Performance**: Powered by Next.js 15
+- 📦 **Component-Based**: Modular React components
+- 🎯 **SEO-Friendly**: Optimized for search engines with Next.js metadata
+
+## Tech Stack
+
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS 3** - Styling
+- **Lucide React** - Icons
+- **React Scroll** - Smooth scrolling
+- **Framer Motion** - Animations
+
+## Project Structure
+
+```
+VVT Trans/
+├── src/
+│   ├── app/                # Next.js App Router
+│   │   ├── layout.tsx      # Root layout
+│   │   └── page.tsx        # Home page
+│   ├── components/         # React components
+│   │   ├── About.tsx
+│   │   ├── Certifications.tsx
+│   │   ├── Contact.tsx
+│   │   ├── CookieBanner.tsx
+│   │   ├── Fleet.tsx
+│   │   ├── FloatingButtons.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── Hero.tsx
+│   │   └── Services.tsx
+│   ├── lib/
+│   │   └── translations.ts  # Multilingual content
+│   ├── utils/
+│   │   └── cn.ts           # Utility functions
+│   └── index.css           # Global styles
+├── public/                 # Static assets
+├── package.json           # Dependencies
+├── tsconfig.json          # TypeScript config
+├── next.config.js         # Next.js config
+├── tailwind.config.js     # Tailwind CSS config
+└── postcss.config.js      # PostCSS config
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+Dependencies have already been installed. If you need to reinstall:
+
+```bash
+npm install
+```
+
+### Development
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site will be available at `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build for production:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+The built files will be in the `.next` folder.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Start Production Server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Start the production server:
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This starts the production server on `http://localhost:3000`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Services Offered
+
+- ❄️ Refrigerated Transport (Frigo)
+- 📦 Dry Goods Logistics
+- 🏭 Warehousing (Dry & Cold)
+- 🔄 Cross-Docking & Transshipment
+- 📮 Groupage Shipments
+- 🌐 International Spedition
+- ⚠️ ADR & Pharmaceutical Transport
+- 🚛 24/7 TIR Parking
+
+## Certifications
+
+- ADR Agreement (Dangerous Goods Transport)
+- Pharmaceutical Transport License
+- International Freight License
+
+## Contact Information
+
+- **Email**: transgroupvvt@gmail.com
+- **Phone**: +359 876 535 379
+- **Address**: 6 Osvobozhdenie Blvd
+
+## License
+
+Private - All rights reserved to Trans Group VVT OOD
+
