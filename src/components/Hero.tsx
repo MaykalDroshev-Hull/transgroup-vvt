@@ -3,17 +3,14 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 import { translations, Language } from '@/lib/translations';
-import { LOCALES, getLocaleInfo } from '@/lib/locales';
 import { CheckCircle, ChevronRight } from 'lucide-react';
 import { cn } from '@/utils/cn';
-import ReactCountryFlag from 'react-country-flag';
 
 interface HeroProps {
   lang: Language;
-  setLang: (lang: Language) => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ lang, setLang }) => {
+const Hero: React.FC<HeroProps> = ({ lang }) => {
   const t = translations[lang].hero;
 
   return (
@@ -29,42 +26,6 @@ const Hero: React.FC<HeroProps> = ({ lang, setLang }) => {
 
       <div className="container mx-auto px-4 z-10 pt-20 relative">
         <div className="max-w-4xl text-white relative z-20">
-          {/* Language Switcher (Hero Level) */}
-          <div className="mb-6 flex flex-wrap gap-4" style={{ position: 'relative', zIndex: 100 }}>
-             {LOCALES.map((locale) => {
-                const active = lang === locale.locale;
-                return (
-                  <button
-                    key={locale.locale}
-                    onClick={() => {
-                      console.log('Click handler fired for:', locale.locale);
-                      setLang(locale.locale);
-                    }}
-                    onMouseDown={(e) => {
-                      console.log('MouseDown fired for:', locale.locale);
-                    }}
-                    className={cn(
-                      "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm border transition cursor-pointer",
-                      active
-                        ? "bg-white/20 border-white text-white font-bold shadow-lg scale-105"
-                        : "bg-black/20 border-transparent text-gray-300 hover:bg-white/10"
-                    )}
-                    aria-pressed={active}
-                    type="button"
-                    style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}
-                  >
-                    <ReactCountryFlag
-                      countryCode={locale.country}
-                      svg
-                      style={{ width: '1.1em', height: '1.1em', borderRadius: '3px', pointerEvents: 'none' }}
-                      aria-label={locale.label}
-                    />
-                    <span className="font-medium tracking-wide" style={{ pointerEvents: 'none' }}>{locale.label}</span>
-                  </button>
-                );
-              })}
-          </div>
-
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             {t.headline}
           </h1>

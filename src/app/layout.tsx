@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans text-gray-900 antialiased selection:bg-blue-100 selection:text-blue-900">
+      <body className="font-sans text-gray-900 antialiased selection:bg-blue-100 selection:text-blue-900" style={{ backgroundColor: '#F7F8FA' }}>
         {children}
       </body>
     </html>

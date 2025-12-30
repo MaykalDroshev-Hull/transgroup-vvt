@@ -20,14 +20,14 @@ export default function Home() {
     <>
       <Header lang={lang} setLang={setLang} />
       <main>
-        <Hero lang={lang} setLang={setLang} />
+        <Hero lang={lang} />
         <Services lang={lang} />
         <Fleet lang={lang} />
         <About lang={lang} />
         <Certifications lang={lang} />
         <Contact lang={lang} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
       <FloatingButtons />
       <CookieBanner lang={lang} />
     </>

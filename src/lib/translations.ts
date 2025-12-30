@@ -7,7 +7,15 @@ export const translations = {
       fleet: 'Флот и База',
       about: 'За Нас',
       contact: 'Контакт',
-      quote: 'Запитване'
+      quote: 'Запитване',
+      menu: 'Меню',
+      selectLanguage: 'Изберете език:',
+      more: 'Още',
+      autoParking: 'Авто Паркинг',
+      gallery: 'Галерия',
+      industries: 'Индустрии',
+      careers: 'Кариери',
+      certificates: 'Сертификати'
     },
     hero: {
       headline: 'Хладилна Логистика & Международна Спедиция',
@@ -72,6 +80,24 @@ export const translations = {
     cookieBanner: {
       message: 'Използваме бисквитки, за да осигурим най-доброто изживяване на нашия уебсайт. Продължавайки да посещавате този сайт, вие се съгласявате с използването на бисквитки.',
       accept: 'Приемам'
+    },
+    footer: {
+      companyDescription: 'Надеждни логистични решения за вашия бизнес. Международен и вътрешен транспорт с високо качество.',
+      quickLinks: 'Бързи връзки',
+      services: 'Услуги',
+      about: 'За нас',
+      careers: 'Кариери',
+      contacts: 'Контакти',
+      contactTitle: 'Контакти',
+      address: 'Адрес',
+      phone: 'Телефон',
+      email: 'Имейл',
+      copyright: '© 2026 TransGroup VVT. Всички права запазени.',
+      createdBy: 'Създадено от H&M WsPro',
+      autoParking: 'Авто Паркинг',
+      gallery: 'Галерия',
+      industries: 'Индустрии',
+      certificates: 'Сертификати'
     }
   },
   'en-GB': {
@@ -80,7 +106,15 @@ export const translations = {
       fleet: 'Fleet & Facilities',
       about: 'About',
       contact: 'Contact',
-      quote: 'Request Quote'
+      quote: 'Request Quote',
+      menu: 'Menu',
+      selectLanguage: 'Select Language:',
+      more: 'More',
+      autoParking: 'Auto Parking',
+      gallery: 'Gallery',
+      industries: 'Industries',
+      careers: 'Careers',
+      certificates: 'Certificates'
     },
     hero: {
       headline: 'Frigo Logistics & International Spedition',
@@ -145,6 +179,24 @@ export const translations = {
     cookieBanner: {
       message: 'We use cookies to ensure you get the best experience on our website. By continuing to visit this site you agree to our use of cookies.',
       accept: 'Accept'
+    },
+    footer: {
+      companyDescription: 'Reliable logistics solutions for your business. International and domestic transport with high quality.',
+      quickLinks: 'Quick Links',
+      services: 'Services',
+      about: 'About Us',
+      careers: 'Careers',
+      contacts: 'Contact',
+      contactTitle: 'Contact',
+      address: 'Address',
+      phone: 'Phone',
+      email: 'Email',
+      copyright: '© 2026 TransGroup VVT. All rights reserved.',
+      createdBy: 'Created by H&M WsPro',
+      autoParking: 'Auto Parking',
+      gallery: 'Gallery',
+      industries: 'Industries',
+      certificates: 'Certificates'
     }
   },
   pl: {
@@ -153,7 +205,15 @@ export const translations = {
       fleet: 'Flota i Obiekty',
       about: 'O Nas',
       contact: 'Kontakt',
-      quote: 'Zapytanie'
+      quote: 'Zapytanie',
+      menu: 'Menu',
+      selectLanguage: 'Wybierz język:',
+      more: 'Więcej',
+      autoParking: 'Parking Samochodowy',
+      gallery: 'Galeria',
+      industries: 'Przemysły',
+      careers: 'Kariera',
+      certificates: 'Certyfikaty'
     },
     hero: {
       headline: 'Logistyka Chłodnicza & Spedycja Międzynarodowa',
@@ -218,6 +278,24 @@ export const translations = {
     cookieBanner: {
       message: 'Używamy plików cookie, aby zapewnić najlepsze wrażenia na naszej stronie internetowej. Kontynuując odwiedzanie tej strony, zgadzasz się na używanie plików cookie.',
       accept: 'Akceptuję'
+    },
+    footer: {
+      companyDescription: 'Niezawodne rozwiązania logistyczne dla Twojej firmy. Transport międzynarodowy i krajowy wysokiej jakości.',
+      quickLinks: 'Szybkie linki',
+      services: 'Usługi',
+      about: 'O nas',
+      careers: 'Kariera',
+      contacts: 'Kontakt',
+      contactTitle: 'Kontakt',
+      address: 'Adres',
+      phone: 'Telefon',
+      email: 'Email',
+      copyright: '© 2026 TransGroup VVT. Wszelkie prawa zastrzeżone.',
+      createdBy: 'Stworzone przez H&M WsPro',
+      autoParking: 'Parking Samochodowy',
+      gallery: 'Galeria',
+      industries: 'Przemysły',
+      certificates: 'Certyfikaty'
     }
   },
   el: {
@@ -226,7 +304,15 @@ export const translations = {
       fleet: 'Στόλος & Εγκαταστάσεις',
       about: 'Σχετικά',
       contact: 'Επικοινωνία',
-      quote: 'Προσφορά'
+      quote: 'Προσφορά',
+      menu: 'Μενού',
+      selectLanguage: 'Επιλέξτε γλώσσα:',
+      more: 'Περισσότερα',
+      autoParking: 'Στάθμευση Αυτοκινήτων',
+      gallery: 'Γκαλερί',
+      industries: 'Βιομηχανίες',
+      careers: 'Καριέρα',
+      certificates: 'Πιστοποιητικά'
     },
     hero: {
       headline: 'Ψυκτική Λογιστική & Διεθνής Διαμεταφορά',
@@ -291,6 +377,24 @@ export const translations = {
     cookieBanner: {
       message: 'Χρησιμοποιούμε cookies για να εξασφαλίσουμε την καλύτερη εμπειρία στον ιστότοπό μας. Συνεχίζοντας να επισκέπτεστε αυτόν τον ιστότοπο, συμφωνείτε με τη χρήση cookies.',
       accept: 'Αποδέχομαι'
+    },
+    footer: {
+      companyDescription: 'Αξιόπιστες λογιστικές λύσεις για την επιχείρησή σας. Διεθνείς και εσωτερικές μεταφορές υψηλής ποιότητας.',
+      quickLinks: 'Γρήγοροι Σύνδεσμοι',
+      services: 'Υπηρεσίες',
+      about: 'Σχετικά με εμάς',
+      careers: 'Καριέρα',
+      contacts: 'Επικοινωνία',
+      contactTitle: 'Επικοινωνία',
+      address: 'Διεύθυνση',
+      phone: 'Τηλέφωνο',
+      email: 'Email',
+      copyright: '© 2026 TransGroup VVT. Όλα τα δικαιώματα διατηρούνται.',
+      createdBy: 'Δημιουργήθηκε από H&M WsPro',
+      autoParking: 'Στάθμευση Αυτοκινήτων',
+      gallery: 'Γκαλερί',
+      industries: 'Βιομηχανίες',
+      certificates: 'Πιστοποιητικά'
     }
   }
 };
