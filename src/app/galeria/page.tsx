@@ -5,11 +5,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import CookieBanner from "@/components/CookieBanner";
-import { Language } from "@/lib/translations";
-import { useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
+import { translations } from "@/lib/translations";
 
 export default function Galeria() {
-  const [lang, setLang] = useState<Language>('bg');
+  const { lang, setLang } = useLanguage();
+  const t = translations[lang].gallery;
   const galleryItems = [
     { type: "truck", title: "Mercedes-Benz Actros", description: "Тежкотоварен камион за международни превози" },
     { type: "warehouse", title: "Съвременен склад", description: "Автоматизирано складиране с контрол на температурата" },
@@ -25,14 +26,14 @@ export default function Galeria() {
   return (
     <>
       <Header lang={lang} setLang={setLang} />
-      <main className="min-h-screen">
+      <main className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-secondary text-white py-16 lg:py-24">
+      <section className="bg-gray-50 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">Галерия</h1>
-            <p className="text-xl opacity-90 max-w-3xl mx-auto">
-              Реални кадри от нашата работа, транспортни операции и логистични процеси
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">{t.hero.title}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t.hero.subtitle}
             </p>
           </div>
         </div>
@@ -76,18 +77,18 @@ export default function Galeria() {
       <section className="py-16 lg:py-24 bg-section-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-            Нашата работа във видео
+            {t.video.title}
           </h2>
-          <p className="text-lg text-text-secondary mb-8">
-            Вижте как организираме и извършваме транспортните операции
+          <p className="text-lg text-gray-600 mb-8">
+            {t.video.subtitle}
           </p>
 
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg flex items-center justify-center mb-4">
               <div className="text-center">
                 <Camera className="h-16 w-16 mb-4" />
-                <p className="text-text-secondary">Видео презентация на нашите услуги</p>
-                <p className="text-sm text-text-secondary mt-2">Coming soon...</p>
+                <p className="text-gray-600">Видео презентация на нашите услуги</p>
+                <p className="text-sm text-gray-600 mt-2">Coming soon...</p>
               </div>
             </div>
           </div>

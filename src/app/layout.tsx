@@ -4,6 +4,9 @@ import '@/index.css'
 export const metadata: Metadata = {
   title: 'Trans Group VVT - International Logistics & Spedition',
   description: 'Temperature-controlled transport, warehousing, groupage and international spedition solutions in Bulgaria and Europe.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({

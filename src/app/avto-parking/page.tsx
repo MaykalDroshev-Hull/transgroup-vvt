@@ -5,79 +5,43 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import CookieBanner from "@/components/CookieBanner";
-import { Language } from "@/lib/translations";
-import { useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
+import { translations } from "@/lib/translations";
 
 export default function AvtoParking() {
-  const [lang, setLang] = useState<Language>('bg');
-  const services = [
-    {
-      name: "Охраняем паркинг",
-      description: "24/7 охрана с професионален екип и модерно видеонаблюдение",
-      icon: <Shield className="h-12 w-12" />,
-      features: ["Кръглосъчно наблюдение", "Контролиран достъп", "Охрана на периметъра"]
-    },
-    {
-      name: "Техническо обслужване",
-      description: "Възможност за основен ремонт и поддръжка на вашия автомобил",
-      icon: <Wrench className="h-12 w-12" />,
-      features: ["Диагностика", "Ремонтни дейности", "Подмяна на части"]
-    },
-    {
-      name: "Митене и почистване",
-      description: "Професионално почистване на автомобили преди и след транспорт",
-      icon: <Droplets className="h-12 w-12" />,
-      features: ["Вътрешно почистване", "Външно измиване", "Дезинфекция"]
-    },
-    {
-      name: "Складиране на части",
-      description: "Сигурно съхранение на резервни части и оборудване",
-      icon: <Package className="h-12 w-12" />,
-      features: ["Контролирана среда", "Организирано съхранение", "Бърз достъп"]
-    }
+  const { lang, setLang } = useLanguage();
+  const t = translations[lang].autoParking;
+  
+  const serviceIcons = [
+    <Shield className="h-12 w-12" />,
+    <Wrench className="h-12 w-12" />,
+    <Droplets className="h-12 w-12" />,
+    <Package className="h-12 w-12" />
   ];
 
-  const facilities = [
-    { name: "Покрити паркоместа", count: "200+", description: "Защита от атмосферни влияния" },
-    { name: "Открити паркоместа", count: "500+", description: "За временно паркиране" },
-    { name: "Сервизни халета", count: "3", description: "За ремонт и поддръжка" },
-    { name: "Административна сграда", count: "1", description: "Служби и администрация" }
-  ];
+  const serviceKeys = ['security', 'maintenance', 'cleaning', 'storage'] as const;
+  const services = serviceKeys.map((key, index) => ({
+    ...t.services.items[key],
+    icon: serviceIcons[index]
+  }));
 
-  const pricing = [
-    {
-      service: "Дневно паркиране",
-      price: "15 лв/ден",
-      description: "За леки автомобили и малки товарни"
-    },
-    {
-      service: "Седмично паркиране",
-      price: "80 лв/седмица",
-      description: "Намаление 15% при седмично плащане"
-    },
-    {
-      service: "Месечно паркиране",
-      price: "250 лв/месец",
-      description: "Намаление 30% при месечно плащане"
-    },
-    {
-      service: "Дългосрочно съхранение",
-      price: "По договаряне",
-      description: "Индивидуални цени за сезонно съхранение"
-    }
-  ];
+  const facilityKeys = ['covered', 'open', 'workshops', 'office'] as const;
+  const facilities = facilityKeys.map(key => t.facilities.items[key]);
+
+  const pricingKeys = ['daily', 'weekly', 'monthly', 'longterm'] as const;
+  const pricing = pricingKeys.map(key => t.pricing.items[key]);
 
   return (
     <>
       <Header lang={lang} setLang={setLang} />
-      <main className="min-h-screen">
+      <main className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-secondary text-white py-16 lg:py-24">
+      <section className="bg-gray-50 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">Авто паркинг</h1>
-            <p className="text-xl opacity-90 max-w-3xl mx-auto">
-              Охраняем автопаркинг с модерна инфраструктура и денонощно видеонаблюдение
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">{t.hero.title}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t.hero.subtitle}
             </p>
           </div>
         </div>
@@ -88,10 +52,10 @@ export default function AvtoParking() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-              Нашите услуги
+              {t.services.title}
             </h2>
-            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-              Пълно обслужване за вашия автомобил по време на престой
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              {t.services.subtitle}
             </p>
           </div>
 
@@ -100,10 +64,10 @@ export default function AvtoParking() {
               <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8">
                 <div className="text-accent mb-4">{service.icon}</div>
                 <h3 className="text-2xl font-semibold text-primary mb-4">{service.name}</h3>
-                <p className="text-text-secondary mb-6">{service.description}</p>
+                <p className="text-gray-600 mb-6">{service.description}</p>
                 <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-text-secondary">
+                  {service.features.map((feature: string, featureIndex: number) => (
+                    <li key={featureIndex} className="flex items-center text-gray-600">
                       <CheckCircle className="h-4 w-4 text-accent mr-2 flex-shrink-0" />
                       {feature}
                     </li>
@@ -120,10 +84,10 @@ export default function AvtoParking() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-              Инфраструктура
+              {t.facilities.title}
             </h2>
-            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-              Съвременни съоръжения за сигурно съхранение на вашия автомобил
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              {t.facilities.subtitle}
             </p>
           </div>
 
@@ -132,7 +96,7 @@ export default function AvtoParking() {
               <div key={index} className="bg-white rounded-xl shadow-sm p-6 text-center">
                 <div className="text-3xl font-bold text-accent mb-2">{facility.count}</div>
                 <h3 className="text-lg font-semibold text-primary mb-2">{facility.name}</h3>
-                <p className="text-text-secondary text-sm">{facility.description}</p>
+                <p className="text-gray-600 text-sm">{facility.description}</p>
               </div>
             ))}
           </div>
@@ -145,35 +109,35 @@ export default function AvtoParking() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-                Сигурност и контрол
+                {t.security.title}
               </h2>
               <div className="space-y-4">
                 <div className="flex items-start">
                   <Camera className="h-5 w-5 text-accent mr-3" />
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Видеонаблюдение 24/7</h3>
-                    <p className="text-text-secondary">Над 100 камери с висока резолюция покриват цялата територия</p>
+                    <p className="text-gray-600">Над 100 камери с висока резолюция покриват цялата територия</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <DoorOpen className="h-5 w-5 text-accent mr-3" />
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Контролиран достъп</h3>
-                    <p className="text-text-secondary">Електронни пропуски и регистрация на всички посетители</p>
+                    <p className="text-gray-600">Електронни пропуски и регистрация на всички посетители</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <Users className="h-5 w-5 text-accent mr-3" />
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Професионална охрана</h3>
-                    <p className="text-text-secondary">Кръглосъчни патрули и бързо реагиране при инциденти</p>
+                    <p className="text-gray-600">Кръглосъчни патрули и бързо реагиране при инциденти</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <AlertTriangle className="h-5 w-5 text-accent mr-3" />
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Система за пожарна безопасност</h3>
-                    <p className="text-text-secondary">Автоматична пожарогасителна система и датчици за дим</p>
+                    <p className="text-gray-600">Автоматична пожарогасителна система и датчици за дим</p>
                   </div>
                 </div>
               </div>
@@ -183,19 +147,19 @@ export default function AvtoParking() {
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-accent mb-2">0</div>
-                  <p className="text-text-secondary">Кражи през 2024</p>
+                  <p className="text-gray-600">Кражи през 2024</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-accent mb-2">24/7</div>
-                  <p className="text-text-secondary">Видеонаблюдение</p>
+                  <p className="text-gray-600">Видеонаблюдение</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-accent mb-2">100+</div>
-                  <p className="text-text-secondary">Камери</p>
+                  <p className="text-gray-600">Камери</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-accent mb-2">15</div>
-                  <p className="text-text-secondary">Охранители</p>
+                  <p className="text-gray-600">Охранители</p>
                 </div>
               </div>
             </div>
@@ -208,10 +172,10 @@ export default function AvtoParking() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-              Цени
+              {t.pricing.title}
             </h2>
-            <p className="text-lg text-text-secondary">
-              Конкурентни цени с възможност за намаления при дългосрочни договори
+            <p className="text-lg text-gray-600">
+              {t.pricing.subtitle}
             </p>
           </div>
 
@@ -220,7 +184,7 @@ export default function AvtoParking() {
               <div key={index} className="bg-white rounded-xl shadow-sm p-6">
                 <h3 className="text-xl font-semibold text-primary mb-2">{item.service}</h3>
                 <div className="text-2xl font-bold text-accent mb-3">{item.price}</div>
-                <p className="text-text-secondary text-sm">{item.description}</p>
+                <p className="text-gray-600 text-sm">{item.description}</p>
               </div>
             ))}
           </div>
@@ -231,16 +195,16 @@ export default function AvtoParking() {
       <section className="py-16 lg:py-24 bg-section-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-            Резервирайте място
+            {t.cta.title}
           </h2>
-          <p className="text-xl mb-8 text-text-secondary">
-            Свържете се с нас за резервация и допълнителна информация
+          <p className="text-xl mb-8 text-gray-600">
+            {t.cta.description}
           </p>
           <a
             href="/zapitvane-oferta"
-            className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors shadow-lg inline-block"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors shadow-lg inline-block"
           >
-            Запитване за резервация
+            {t.cta.button}
           </a>
         </div>
       </section>

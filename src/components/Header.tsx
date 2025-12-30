@@ -19,17 +19,21 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   const [isHomePage, setIsHomePage] = useState(false);
+  const [isNewPage, setIsNewPage] = useState(false);
   const t = translations[lang].nav;
 
   useEffect(() => {
-    // Check if we're on the home page
-    setIsHomePage(window.location.pathname === '/');
+    // Check if we're on the home page or new pages (only in browser)
+    if (typeof window !== 'undefined') {
+      setIsHomePage(window.location.pathname === '/');
+      setIsNewPage(['/avto-parking', '/galeria', '/industrii', '/karieri', '/sertifikati'].includes(window.location.pathname));
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+      const handleScroll = () => {
+        setScrolled(window.scrollY > 50);
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
   useEffect(() => {
@@ -86,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
           {/* Small Logo (Top Left) */}
           <div className="flex items-center cursor-pointer" onClick={() => window.location.href = '/'}>
              <img
-              src="https://ndcgnswvhpnffvbzqcrn.supabase.co/storage/v1/object/public/VVT%20Transgroup/vvt%20(1).png"
+              src="/images/logo.png"
               alt="Trans Group VVT Logo"
               className="h-10 transition-all duration-300"
             />
@@ -94,21 +98,40 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                smooth={true}
-                duration={500}
-                offset={-80}
-                className={cn(
-                  'cursor-pointer text-sm font-medium transition-colors hover:text-blue-600',
-                  isHomePage ? 'text-white' : 'text-gray-800'
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (isHomePage) {
+                // On homepage: use react-scroll for smooth scrolling
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    className={cn(
+                      'cursor-pointer text-sm font-medium transition-colors hover:text-blue-600',
+                      scrolled || !isHomePage ? 'text-gray-800' : 'text-white'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              } else {
+                // Not on homepage: navigate to homepage with hash
+                return (
+                  <NextLink
+                    key={link.to}
+                    href={`/#${link.to}`}
+                    className={cn(
+                      'cursor-pointer text-sm font-medium transition-colors hover:text-blue-600',
+                      scrolled || !isHomePage ? 'text-gray-800' : 'text-white'
+                    )}
+                  >
+                    {link.label}
+                  </NextLink>
+                );
+              }
+            })}
 
             {/* More Dropdown */}
             <div className="relative more-dropdown">
@@ -116,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
                 className={cn(
                   'flex items-center space-x-1 cursor-pointer text-sm font-medium transition-colors hover:text-blue-600',
-                  isHomePage ? 'text-white' : 'text-gray-800'
+                  scrolled || !isHomePage ? 'text-gray-800' : 'text-white'
                 )}
               >
                 <span>{t.more}</span>
@@ -147,7 +170,7 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
           {/* Language Switcher (Desktop) */}
           <div className="hidden md:flex items-center space-x-2">
              <div className="relative group">
-              <button className={cn("flex items-center space-x-1.5", isHomePage ? "text-white" : "text-gray-800")}>
+              <button className={cn("flex items-center space-x-1.5", scrolled || !isHomePage ? "text-gray-800" : "text-white")}>
                   <Globe className="w-5 h-5" />
                   <ReactCountryFlag
                     countryCode={getLocaleInfo(lang).country}
@@ -192,23 +215,25 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-               <X className={cn("w-6 h-6", isHomePage ? "text-white" : "text-gray-800")} />
+               <X className={cn("w-6 h-6", scrolled || !isHomePage ? "text-gray-800" : "text-white")} />
             ) : (
-               <Menu className={cn("w-6 h-6", isHomePage ? "text-white" : "text-gray-800")} />
+               <Menu className={cn("w-6 h-6", scrolled || !isHomePage ? "text-gray-800" : "text-white")} />
             )}
           </button>
         </div>
 
-        {/* Bottom Row: Large Centered Logo (Desktop Only) */}
-        <div className="hidden md:flex justify-center mt-3">
-          <div className="flex items-center cursor-pointer" onClick={() => window.location.href = '/'}>
-             <img
-              src="https://ndcgnswvhpnffvbzqcrn.supabase.co/storage/v1/object/public/VVT%20Transgroup/vvt%20(1).png"
-              alt="Trans Group VVT Logo"
-              className="h-[7.5rem] transition-all duration-300"
-            />
+        {/* Bottom Row: Large Centered Logo (Desktop Only) - Hidden on new pages */}
+        {!isNewPage && (
+          <div className="hidden md:flex justify-center mt-3">
+            <div className="flex items-center cursor-pointer" onClick={() => window.location.href = '/'}>
+               <img
+                src="/images/logo.png"
+                alt="Trans Group VVT Logo"
+                className="h-[7.5rem] transition-all duration-300"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Mobile Menu Drawer */}
@@ -233,33 +258,50 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
             <div className="px-4 py-6 space-y-6">
               {/* Navigation Links */}
               <nav className="space-y-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    smooth={true}
-                    duration={500}
-                    offset={-80}
-                    className="block text-gray-800 font-medium py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  if (isHomePage) {
+                    // On homepage: use react-scroll for smooth scrolling
+                    return (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        smooth={true}
+                        duration={500}
+                        offset={-80}
+                        className="block text-gray-800 font-medium py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  } else {
+                    // Not on homepage: navigate to homepage with hash
+                    return (
+                      <NextLink
+                        key={link.to}
+                        href={`/#${link.to}`}
+                        className="block text-gray-800 font-medium py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </NextLink>
+                    );
+                  }
+                })}
 
                 {/* More Links */}
                 <div className="border-t border-gray-200 pt-4">
                   <p className="text-gray-500 text-sm mb-3 font-medium">{t.more}:</p>
                   <div className="space-y-2">
                     {moreNavLinks.map((link) => (
-                      <Link
+                      <NextLink
                         key={link.href}
-                        to={link.href}
+                        href={link.href}
                         className="block text-gray-800 font-medium py-2 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {link.label}
-                      </Link>
+                      </NextLink>
                     ))}
                   </div>
                 </div>
