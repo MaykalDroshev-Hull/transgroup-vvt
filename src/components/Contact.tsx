@@ -27,7 +27,7 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
                 <Mail className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">Email</p>
+                <p className="font-medium text-gray-900">{t.email}</p>
                 <a href="mailto:transgroupvvt@gmail.com" className="text-gray-600 hover:text-blue-600">
                   transgroupvvt@gmail.com
                 </a>
@@ -39,7 +39,7 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
                 <Phone className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">Phone</p>
+                <p className="font-medium text-gray-900">{t.phone}</p>
                 <a href="tel:+359876535379" className="text-gray-600 hover:text-blue-600">
                   +359 876 535 379
                 </a>
@@ -51,7 +51,7 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
                 <MapPin className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">Address</p>
+                <p className="font-medium text-gray-900">{t.addressLabel}</p>
                 <p className="text-gray-600">
                   {t.address}
                 </p>
@@ -93,11 +93,11 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{t.form.cargo}</label>
                   <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white">
-                    <option value="">Select...</option>
-                    <option value="frigo">Refrigerated</option>
-                    <option value="dry">Dry Goods</option>
-                    <option value="groupage">Groupage</option>
-                    <option value="other">Other</option>
+                    <option value="">{t.form.cargoOptions.select}</option>
+                    <option value="frigo">{t.form.cargoOptions.frigo}</option>
+                    <option value="dry">{t.form.cargoOptions.dry}</option>
+                    <option value="groupage">{t.form.cargoOptions.groupage}</option>
+                    <option value="other">{t.form.cargoOptions.other}</option>
                   </select>
                 </div>
               </div>

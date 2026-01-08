@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
     // Check if we're on the home page or new pages (only in browser)
     if (typeof window !== 'undefined') {
       setIsHomePage(window.location.pathname === '/');
-      setIsNewPage(['/avto-parking', '/galeria', '/industrii', '/karieri', '/sertifikati'].includes(window.location.pathname));
+      setIsNewPage(['/avto-parking', '/galeria', '/industrii', '/karieri'].includes(window.location.pathname));
 
       const handleScroll = () => {
         setScrolled(window.scrollY > 50);
@@ -63,7 +63,6 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
     { href: '/galeria', label: t.gallery },
     { href: '/industrii', label: t.industries },
     { href: '/karieri', label: t.careers },
-    { href: '/sertifikati', label: t.certificates },
   ];
 
   return (

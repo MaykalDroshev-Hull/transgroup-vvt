@@ -1,6 +1,9 @@
+'use client'
+
 import React from 'react';
+import Image from 'next/image';
 import { translations, Language } from '@/lib/translations';
-import { Truck, Package, Warehouse, ArrowRightLeft, Boxes, Globe, FlaskConical, SquareParking } from 'lucide-react';
+import { FlaskConical } from 'lucide-react';
 
 interface ServicesProps {
   lang: Language;
@@ -10,14 +13,14 @@ const Services: React.FC<ServicesProps> = ({ lang }) => {
   const t = translations[lang].services;
 
   const services = [
-    { icon: <Truck className="w-10 h-10 text-blue-600" />, title: t.items.frigo },
-    { icon: <Package className="w-10 h-10 text-blue-600" />, title: t.items.dry },
-    { icon: <Warehouse className="w-10 h-10 text-blue-600" />, title: t.items.warehousing },
-    { icon: <ArrowRightLeft className="w-10 h-10 text-blue-600" />, title: t.items.crossdock },
-    { icon: <Boxes className="w-10 h-10 text-blue-600" />, title: t.items.groupage },
-    { icon: <Globe className="w-10 h-10 text-blue-600" />, title: t.items.spedition },
-    { icon: <FlaskConical className="w-10 h-10 text-blue-600" />, title: t.items.adr },
-    { icon: <SquareParking className="w-10 h-10 text-blue-600" />, title: t.items.parking },
+    { image: '/images/Resources/Quality/IMG_019.jpg', title: t.items.frigo, hasImage: true },
+    { image: '/images/Resources/Stock/IMG_007.jpg', title: t.items.dry, hasImage: true },
+    { image: '/images/Resources/Stock/IMG_067.jpg', title: t.items.warehousing, hasImage: true },
+    { image: '/images/Resources/Stock/IMG_044.jpg', title: t.items.crossdock, hasImage: true },
+    { image: '/images/Resources/Stock/IMG_040.jpg', title: t.items.groupage, hasImage: true },
+    { image: '/images/Resources/Journeys/IMG_103.jpg', title: t.items.spedition, hasImage: true },
+    { image: null, title: t.items.adr, hasImage: false },
+    { image: '/images/Resources/Journeys/IMG_088.jpg', title: t.items.parking, hasImage: true },
   ];
 
   return (
@@ -32,10 +35,26 @@ const Services: React.FC<ServicesProps> = ({ lang }) => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col items-center text-center group"
+              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col items-center text-center group overflow-hidden"
             >
-              <div className="mb-6 p-4 bg-blue-50 rounded-full group-hover:bg-blue-100 transition-colors duration-300">
-                {service.icon}
+              <div className="mb-6 w-full h-48 relative rounded-lg overflow-hidden bg-gray-100">
+                {service.hasImage && service.image ? (
+                  <>
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      quality={90}
+                      unoptimized={false}
+                    />
+                  </>
+                ) : (
+                  <div className="absolute inset-0 w-full h-full flex items-center justify-center p-4 bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300">
+                    <FlaskConical className="w-10 h-10 text-blue-600" />
+                  </div>
+                )}
               </div>
               <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
             </div>

@@ -1,6 +1,10 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
+import Image from 'next/image';
 import { translations, Language } from '@/lib/translations';
 import { Building2, Globe2, ShieldCheck } from 'lucide-react';
+import ImageLightbox from './ImageLightbox';
 
 interface AboutProps {
   lang: Language;
@@ -8,6 +12,23 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ lang }) => {
   const t = translations[lang].about;
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Journeys images (excluding IMG_088.jpg which is used in Auto Parking)
+  const journeysImages = [
+    '/images/Resources/Journeys/IMG_015.jpg',
+    '/images/Resources/Journeys/IMG_035.jpg',
+    '/images/Resources/Journeys/IMG_043.jpg',
+    '/images/Resources/Journeys/IMG_047.jpg',
+    '/images/Resources/Journeys/IMG_068.jpg',
+    '/images/Resources/Journeys/IMG_070.jpg',
+    '/images/Resources/Journeys/IMG_078.jpg',
+    '/images/Resources/Journeys/IMG_085.jpg',
+    '/images/Resources/Journeys/IMG_094.jpg',
+    '/images/Resources/Journeys/IMG_095.jpg',
+    '/images/Resources/Journeys/IMG_103.jpg'
+  ];
 
   return (
     <section id="about" className="py-20 bg-gray-50">
@@ -55,8 +76,55 @@ const About: React.FC<AboutProps> = ({ lang }) => {
               </div>
             </div>
           </div>
+
+          {/* Journeys Gallery */}
+          <div className="mt-16">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{t.journeys.title}</h3>
+              <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+              <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                {t.journeys.description}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {journeysImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 aspect-square cursor-pointer"
+                  onClick={() => {
+                    setCurrentImageIndex(index);
+                    setLightboxOpen(true);
+                  }}
+                >
+                  <Image 
+                    src={image} 
+                    alt={`Transportation journey ${index + 1}`} 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <p className="text-sm font-medium">Click to expand</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      <ImageLightbox
+        images={journeysImages}
+        currentIndex={currentImageIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNext={() => setCurrentImageIndex((prev) => (prev + 1) % journeysImages.length)}
+        onPrevious={() => setCurrentImageIndex((prev) => (prev - 1 + journeysImages.length) % journeysImages.length)}
+        alt="Transportation journey"
+      />
     </section>
   );
 };

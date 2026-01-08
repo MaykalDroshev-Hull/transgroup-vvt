@@ -1,26 +1,72 @@
 'use client'
 
-import { Truck, Factory, Package, Users, Camera, Building, Shield, Globe } from "lucide-react";
+import { useState } from 'react';
+import Image from 'next/image';
+import { Camera } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import CookieBanner from "@/components/CookieBanner";
+import ImageLightbox from "@/components/ImageLightbox";
 import { useLanguage } from "@/hooks/useLanguage";
 import { translations } from "@/lib/translations";
 
 export default function Galeria() {
   const { lang, setLang } = useLanguage();
   const t = translations[lang].gallery;
-  const galleryItems = [
-    { type: "truck", title: "Mercedes-Benz Actros", description: "Тежкотоварен камион за международни превози" },
-    { type: "warehouse", title: "Съвременен склад", description: "Автоматизирано складиране с контрол на температурата" },
-    { type: "loading", title: "Товарене на контейнери", description: "Ефективни логистични операции на терминала" },
-    { type: "team", title: "Нашият екип", description: "Професионалисти с години опит в логистиката" },
-    { type: "delivery", title: "Доставка до клиент", description: "Последна миля доставка в градски условия" },
-    { type: "fleet", title: "Нашият автопарк", description: "Модерни превозни средства в базата ни" },
-    { type: "office", title: "Офис и контролна зала", description: "Мониторинг на всички транспортни операции" },
-    { type: "safety", title: "Обучение по безопасност", description: "Регулярни обучения за безопасна работа" },
-    { type: "international", title: "Международен транспорт", description: "Камиони на път към Европа" }
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // All Stock images from Resources/Stock
+  const stockImages = [
+    '/images/Resources/Stock/IMG_001.jpg',
+    '/images/Resources/Stock/IMG_002.jpg',
+    '/images/Resources/Stock/IMG_007.jpg',
+    '/images/Resources/Stock/IMG_011.jpg',
+    '/images/Resources/Stock/IMG_012.jpg',
+    '/images/Resources/Stock/IMG_014.jpg',
+    '/images/Resources/Stock/IMG_016.jpg',
+    '/images/Resources/Stock/IMG_018.jpg',
+    '/images/Resources/Stock/IMG_020.jpg',
+    '/images/Resources/Stock/IMG_021.jpg',
+    '/images/Resources/Stock/IMG_023.jpg',
+    '/images/Resources/Stock/IMG_027.jpg',
+    '/images/Resources/Stock/IMG_030.jpg',
+    '/images/Resources/Stock/IMG_031.jpg',
+    '/images/Resources/Stock/IMG_034.jpg',
+    '/images/Resources/Stock/IMG_037.jpg',
+    '/images/Resources/Stock/IMG_040.jpg',
+    '/images/Resources/Stock/IMG_042.jpg',
+    '/images/Resources/Stock/IMG_044.jpg',
+    '/images/Resources/Stock/IMG_048.jpg',
+    '/images/Resources/Stock/IMG_050.jpg',
+    '/images/Resources/Stock/IMG_053.jpg',
+    '/images/Resources/Stock/IMG_054.jpg',
+    '/images/Resources/Stock/IMG_056.jpg',
+    '/images/Resources/Stock/IMG_057.jpg',
+    '/images/Resources/Stock/IMG_060.jpg',
+    '/images/Resources/Stock/IMG_061.jpg',
+    '/images/Resources/Stock/IMG_062.jpg',
+    '/images/Resources/Stock/IMG_065.jpg',
+    '/images/Resources/Stock/IMG_066.jpg',
+    '/images/Resources/Stock/IMG_067.jpg',
+    '/images/Resources/Stock/IMG_069.jpg',
+    '/images/Resources/Stock/IMG_073.jpg',
+    '/images/Resources/Stock/IMG_074.jpg',
+    '/images/Resources/Stock/IMG_075.jpg',
+    '/images/Resources/Stock/IMG_076.jpg',
+    '/images/Resources/Stock/IMG_079.jpg',
+    '/images/Resources/Stock/IMG_081.jpg',
+    '/images/Resources/Stock/IMG_086.jpg',
+    '/images/Resources/Stock/IMG_090.jpg',
+    '/images/Resources/Stock/IMG_092.jpg',
+    '/images/Resources/Stock/IMG_096.jpg',
+    '/images/Resources/Stock/IMG_098.jpg',
+    '/images/Resources/Stock/IMG_100.jpg',
+    '/images/Resources/Stock/IMG_101.jpg',
+    '/images/Resources/Stock/IMG_102.jpg',
+    '/images/Resources/Stock/IMG_104.jpg',
+    '/images/Resources/Stock/IMG_106.jpg'
   ];
 
   return (
@@ -42,29 +88,27 @@ export default function Galeria() {
       {/* Gallery Grid */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {galleryItems.map((item, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                {/* Placeholder for images - in real app these would be actual images */}
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                  <div className="text-6xl opacity-50">
-                    {item.type === 'truck' && <Truck className="h-16 w-16" />}
-                    {item.type === 'warehouse' && <Factory className="h-16 w-16" />}
-                    {item.type === 'loading' && <Package className="h-16 w-16" />}
-                    {item.type === 'team' && <Users className="h-16 w-16" />}
-                    {item.type === 'delivery' && <Truck className="h-16 w-16" />}
-                    {item.type === 'fleet' && <Truck className="h-16 w-16" />}
-                    {item.type === 'office' && <Building className="h-16 w-16" />}
-                    {item.type === 'safety' && <Shield className="h-16 w-16" />}
-                    {item.type === 'international' && <Globe className="h-16 w-16" />}
-                  </div>
-                </div>
-
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <div className="p-6 text-white">
-                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm opacity-90">{item.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {stockImages.map((image, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 aspect-square cursor-pointer"
+                onClick={() => {
+                  setCurrentImageIndex(index);
+                  setLightboxOpen(true);
+                }}
+              >
+                <Image 
+                  src={image} 
+                  alt={`Gallery image ${index + 1}`} 
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="text-white text-center p-4">
+                    <p className="text-sm font-medium">Click to expand</p>
                   </div>
                 </div>
               </div>
@@ -98,6 +142,16 @@ export default function Galeria() {
       <Footer lang={lang} />
       <FloatingButtons />
       <CookieBanner lang={lang} />
+
+      <ImageLightbox
+        images={stockImages}
+        currentIndex={currentImageIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNext={() => setCurrentImageIndex((prev) => (prev + 1) % stockImages.length)}
+        onPrevious={() => setCurrentImageIndex((prev) => (prev - 1 + stockImages.length) % stockImages.length)}
+        alt="Gallery image"
+      />
     </>
   );
 }

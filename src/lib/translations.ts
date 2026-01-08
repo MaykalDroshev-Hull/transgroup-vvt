@@ -43,7 +43,7 @@ export const translations = {
       }
     },
     fleet: {
-      title: 'Флот и Съоръжения',
+      title: 'Флот и База',
       items: {
         trucks: 'Хладилни камиони',
         trailers: 'Ремаркета с тристранно разтоварване',
@@ -57,16 +57,28 @@ export const translations = {
       spedition: 'Спедиция, управлявана от TRANS GROUP VVT-1 OOD',
       license: 'Лиценз за международен превоз на товари',
       pharma: 'Лиценз за фармацевтични товари',
-      gps: 'Интелигентно GPS проследяване за всяка пратка'
+      gps: 'Интелигентно GPS проследяване за всяка пратка',
+      journeys: {
+        title: 'Нашите Пътешествия',
+        description: 'Разгледайте нашите транспортни операции и логистични пътешествия из цяла Европа'
+      }
     },
     certifications: {
+      title: 'Сертификати',
       adr: 'ADR Спогодба',
       pharma: 'Лиценз за Фармацевтика',
-      license: 'Международен Лиценз'
+      license: 'Международен Лиценз',
+      certificateDescriptions: [
+        'Лиценз за международен автомобилен превоз на товари за чужда сметка или срещу възнаграждение',
+        'Сертификат за изолирано, хладилно, механично охлаждано или отоплявано оборудване, използвано за международен превоз на скърпели хранителни продукти по суша'
+      ]
     },
     contact: {
       title: 'Контакт / Запитване',
       infoTitle: 'Информация за връзка',
+      email: 'Имейл',
+      phone: 'Телефон',
+      addressLabel: 'Адрес',
       address: 'бул. Освобождение 6',
       form: {
         company: 'Фирма',
@@ -74,7 +86,14 @@ export const translations = {
         contact: 'Имейл / Телефон',
         cargo: 'Вид товар',
         message: 'Съобщение',
-        submit: 'Изпрати Запитване'
+        submit: 'Изпрати Запитване',
+        cargoOptions: {
+          select: 'Изберете...',
+          frigo: 'Хладилен',
+          dry: 'Сух',
+          groupage: 'Групаж',
+          other: 'Друг'
+        }
       }
     },
     cookieBanner: {
@@ -518,16 +537,28 @@ export const translations = {
       spedition: 'Spedition operated by TRANS GROUP VVT-1 OOD',
       license: 'International freight license',
       pharma: 'Pharmaceutical cargo license',
-      gps: 'Intelligent GPS tracking for every shipment'
+      gps: 'Intelligent GPS tracking for every shipment',
+      journeys: {
+        title: 'Our Journeys',
+        description: 'Experience our transportation operations and logistics journeys across Europe'
+      }
     },
     certifications: {
+      title: 'Certifications',
       adr: 'ADR Agreement',
       pharma: 'Pharmaceutical Transport License',
-      license: 'International Freight License'
+      license: 'International Freight License',
+      certificateDescriptions: [
+        'License for international road transport of goods for hire or reward',
+        'Certificate for Insulated, Refrigerated, Mechanically Refrigerated or Heated Equipment Used for the International Carriage of Perishable Foodstuffs by Land'
+      ]
     },
     contact: {
       title: 'Contact / Request a Quote',
       infoTitle: 'Contact Information',
+      email: 'Email',
+      phone: 'Phone',
+      addressLabel: 'Address',
       address: '6 Osvobozhdenie Blvd',
       form: {
         company: 'Company',
@@ -535,7 +566,14 @@ export const translations = {
         contact: 'Email / Phone',
         cargo: 'Cargo Type',
         message: 'Message',
-        submit: 'Send Request'
+        submit: 'Send Request',
+        cargoOptions: {
+          select: 'Select...',
+          frigo: 'Refrigerated',
+          dry: 'Dry Goods',
+          groupage: 'Groupage',
+          other: 'Other'
+        }
       }
     },
     cookieBanner: {
@@ -967,16 +1005,28 @@ export const translations = {
       spedition: 'Spedycja obsługiwana przez TRANS GROUP VVT-1 OOD',
       license: 'Licencja na przewóz międzynarodowy',
       pharma: 'Licencja na przewóz farmaceutyków',
-      gps: 'Inteligentne śledzenie GPS dla każdej przesyłki'
+      gps: 'Inteligentne śledzenie GPS dla każdej przesyłki',
+      journeys: {
+        title: 'Nasze Podróże',
+        description: 'Doświadcz naszych operacji transportowych i logistycznych podróży w całej Europie'
+      }
     },
     certifications: {
+      title: 'Certyfikaty',
       adr: 'Umowa ADR',
       pharma: 'Licencja Transportowa Farmaceutyczna',
-      license: 'Licencja Spedycyjna Międzynarodowa'
+      license: 'Licencja Spedycyjna Międzynarodowa',
+      certificateDescriptions: [
+        'Licencja na międzynarodowy przewóz drogowy towarów za wynagrodzeniem lub na zlecenie',
+        'Certyfikat dla izolowanego, chłodzonego, mechanicznie chłodzonego lub ogrzewanego wyposażenia używanego do międzynarodowego przewozu artykułów spożywczych szybko psujących się transportem lądowym'
+      ]
     },
     contact: {
       title: 'Kontakt / Zapytanie',
       infoTitle: 'Informacje kontaktowe',
+      email: 'Email',
+      phone: 'Telefon',
+      addressLabel: 'Adres',
       address: 'ul. Osvobozhdenie 6',
       form: {
         company: 'Firma',
@@ -984,7 +1034,14 @@ export const translations = {
         contact: 'Email / Telefon',
         cargo: 'Rodzaj ładunku',
         message: 'Wiadomość',
-        submit: 'Wyślij zapytanie'
+        submit: 'Wyślij zapytanie',
+        cargoOptions: {
+          select: 'Wybierz...',
+          frigo: 'Chłodniczy',
+          dry: 'Towary Suche',
+          groupage: 'Drobnica',
+          other: 'Inny'
+        }
       }
     },
     cookieBanner: {
@@ -1416,16 +1473,28 @@ export const translations = {
       spedition: 'Διαμεταφορά από την TRANS GROUP VVT-1 OOD',
       license: 'Διεθνής άδεια μεταφορών',
       pharma: 'Άδεια μεταφοράς φαρμάκων',
-      gps: 'Έξυπνος εντοπισμός GPS για κάθε αποστολή'
+      gps: 'Έξυπνος εντοπισμός GPS για κάθε αποστολή',
+      journeys: {
+        title: 'Οι Ταξιδιώματές μας',
+        description: 'Γνωρίστε τις μεταφορικές λειτουργίες μας και τα λογιστικά ταξιδιώματα σε όλη την Ευρώπη'
+      }
     },
     certifications: {
+      title: 'Πιστοποιητικά',
       adr: 'Συμφωνία ADR',
       pharma: 'Άδεια Μεταφοράς Φαρμάκων',
-      license: 'Διεθνής Άδεια Μεταφορών'
+      license: 'Διεθνής Άδεια Μεταφορών',
+      certificateDescriptions: [
+        'Άδεια για διεθνή οδική μεταφορά εμπορευμάτων για μίσθωση ή αμοιβή',
+        'Πιστοποιητικό για Μονωμένο, Ψυχόμενο, Μηχανικά Ψυχόμενο ή Θερμαινόμενο Εξοπλισμό που Χρησιμοποιείται για τη Διεθνή Μεταφορά Εύφθαρτων Τροφίμων Δια ξηράς'
+      ]
     },
     contact: {
       title: 'Επικοινωνία / Ζητήστε Προσφορά',
       infoTitle: 'Στοιχεία Επικοινωνίας',
+      email: 'Email',
+      phone: 'Τηλέφωνο',
+      addressLabel: 'Διεύθυνση',
       address: 'Λεωφ. Osvobozhdenie 6',
       form: {
         company: 'Εταιρεία',
@@ -1433,7 +1502,14 @@ export const translations = {
         contact: 'Email / Τηλέφωνο',
         cargo: 'Τύπος Φορτίου',
         message: 'Μήνυμα',
-        submit: 'Αποστολή Αιτήματος'
+        submit: 'Αποστολή Αιτήματος',
+        cargoOptions: {
+          select: 'Επιλέξτε...',
+          frigo: 'Ψυχόμενο',
+          dry: 'Ξηρά Αγαθά',
+          groupage: 'Ομαδική Αποστολή',
+          other: 'Άλλο'
+        }
       }
     },
     cookieBanner: {

@@ -13,7 +13,6 @@ const quickLinksData = [
   { key: "autoParking", href: "/avto-parking" },
   { key: "gallery", href: "/galeria" },
   { key: "industries", href: "/industrii" },
-  { key: "certificates", href: "/sertifikati" },
 ];
 
 const contactInfoData = [

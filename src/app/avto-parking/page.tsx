@@ -1,16 +1,23 @@
 'use client'
 
+import { useState } from 'react';
+import Image from 'next/image';
 import { Shield, Wrench, Droplets, Package, Camera, DoorOpen, Users, AlertTriangle, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import CookieBanner from "@/components/CookieBanner";
+import ImageLightbox from "@/components/ImageLightbox";
 import { useLanguage } from "@/hooks/useLanguage";
 import { translations } from "@/lib/translations";
 
 export default function AvtoParking() {
   const { lang, setLang } = useLanguage();
   const t = translations[lang].autoParking;
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  
+  const parkingImage = '/images/Resources/Journeys/IMG_088.jpg';
+  const parkingImages = [parkingImage];
   
   const serviceIcons = [
     <Shield className="h-12 w-12" />,
@@ -38,11 +45,32 @@ export default function AvtoParking() {
       {/* Hero Section */}
       <section className="bg-gray-50 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center mb-8">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">{t.hero.title}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t.hero.subtitle}
             </p>
+          </div>
+          {/* Parking Image */}
+          <div
+            className="max-w-4xl mx-auto mt-8 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+            onClick={() => setLightboxOpen(true)}
+          >
+            <div className="relative aspect-video">
+              <Image 
+                src={parkingImage}
+                alt="Auto Parking Facility"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 896px"
+                priority
+              />
+              <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors flex items-center justify-center">
+                <div className="text-white opacity-0 hover:opacity-100 transition-opacity text-sm font-medium">
+                  Click to expand
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -212,6 +240,16 @@ export default function AvtoParking() {
       <Footer lang={lang} />
       <FloatingButtons />
       <CookieBanner lang={lang} />
+
+      <ImageLightbox
+        images={parkingImages}
+        currentIndex={0}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNext={() => {}}
+        onPrevious={() => {}}
+        alt="Auto Parking Facility"
+      />
     </>
   );
 }
