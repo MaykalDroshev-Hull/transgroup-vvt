@@ -79,7 +79,7 @@ export const translations = {
       email: 'Имейл',
       phone: 'Телефон',
       addressLabel: 'Адрес',
-      address: 'бул. Освобождение 6',
+      address: 'бул. Освобождение 6, Северна индустриална зона, 5502 Ловеч, България',
       form: {
         company: 'Фирма',
         person: 'Лице за контакт',
@@ -559,7 +559,7 @@ export const translations = {
       email: 'Email',
       phone: 'Phone',
       addressLabel: 'Address',
-      address: '6 Osvobozhdenie Blvd',
+      address: 'bul. Osvobozhdenie 6, Northern Industrial Zone, 5502 Lovech, Bulgaria',
       form: {
         company: 'Company',
         person: 'Contact Person',
@@ -1027,7 +1027,7 @@ export const translations = {
       email: 'Email',
       phone: 'Telefon',
       addressLabel: 'Adres',
-      address: 'ul. Osvobozhdenie 6',
+      address: 'bul. Osvobozhdenie 6, Northern Industrial Zone, 5502 Lovech, Bulgaria',
       form: {
         company: 'Firma',
         person: 'Osoba kontaktowa',
@@ -1495,7 +1495,7 @@ export const translations = {
       email: 'Email',
       phone: 'Τηλέφωνο',
       addressLabel: 'Διεύθυνση',
-      address: 'Λεωφ. Osvobozhdenie 6',
+      address: 'bul. Osvobozhdenie 6, Northern Industrial Zone, 5502 Lovech, Bulgaria',
       form: {
         company: 'Εταιρεία',
         person: 'Υπεύθυνος Επικοινωνίας',

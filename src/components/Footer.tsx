@@ -16,13 +16,13 @@ const quickLinksData = [
 ];
 
 const contactInfoData = [
-  { key: "address", value: "гр. София, ул. Логистика 123" },
-  { key: "phone", value: "+359 2 123 4567" },
-  { key: "email", value: "info@transgroup-vvt.bg" },
+  { key: "phone", value: "+359 876 535 379" },
+  { key: "email", value: "transgroupvvt@gmail.com" },
 ];
 
 export default function Footer({ lang }: FooterProps) {
   const t = translations[lang].footer;
+  const contactT = translations[lang].contact;
 
   return (
     <footer className="bg-[#061325] text-white">
@@ -94,6 +94,10 @@ export default function Footer({ lang }: FooterProps) {
           <div>
             <h3 className="text-xl font-semibold mb-4">{t.contactTitle}</h3>
             <div className="space-y-2">
+              <div>
+                <p className="text-gray-300 text-sm">{t.address}:</p>
+                <p className="text-white">{contactT.address}</p>
+              </div>
               {contactInfoData.map((info) => (
                 <div key={info.key}>
                   <p className="text-gray-300 text-sm">{t[info.key as keyof typeof t]}:</p>
