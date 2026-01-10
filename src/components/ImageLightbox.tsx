@@ -95,20 +95,32 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
         </button>
       )}
 
-      {/* Image Container */}
+      {/* Image/Video Container */}
       <div
         className="relative max-w-[90vw] max-h-[90vh] w-full h-full flex items-center justify-center p-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative w-full h-full max-w-7xl max-h-[90vh]">
-          <Image
-            src={currentImage}
-            alt={`${alt} ${currentIndex + 1} of ${images.length}`}
-            fill
-            className="object-contain"
-            sizes="90vw"
-            priority
-          />
+          {currentImage.endsWith('.mp4') || currentImage.endsWith('.MP4') ? (
+            <video
+              src={currentImage}
+              controls
+              className="w-full h-full object-contain"
+              autoPlay
+              playsInline
+            >
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <Image
+              src={currentImage}
+              alt={`${alt} ${currentIndex + 1} of ${images.length}`}
+              fill
+              className="object-contain"
+              sizes="90vw"
+              priority
+            />
+          )}
         </div>
       </div>
 
