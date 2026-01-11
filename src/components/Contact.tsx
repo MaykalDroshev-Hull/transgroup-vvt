@@ -1,6 +1,8 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import { translations, Language } from '@/lib/translations';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle, X, Loader2 } from 'lucide-react';
 
 interface ContactProps {
   lang: Language;
@@ -8,6 +10,69 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ lang }) => {
   const t = translations[lang].contact;
+  const [formData, setFormData] = useState({
+    company: '',
+    person: '',
+    contact: '',
+    cargo: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+    // Reset status when user starts typing
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+      setErrorMessage('');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          lang,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send email');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        company: '',
+        person: '',
+        contact: '',
+        cargo: '',
+        message: '',
+      });
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" className="py-20 bg-white">
@@ -74,26 +139,52 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
 
           {/* Quote Form */}
           <div className="lg:w-2/3 bg-gray-50 p-8 rounded-2xl border border-gray-100">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{t.form.company}</label>
-                  <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" />
+                  <input 
+                    type="text" 
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{t.form.person}</label>
-                  <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" />
+                  <input 
+                    type="text" 
+                    name="person"
+                    value={formData.person}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" 
+                  />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{t.form.contact}</label>
-                  <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" />
+                  <input 
+                    type="text" 
+                    name="contact"
+                    value={formData.contact}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{t.form.cargo}</label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white">
+                  <select 
+                    name="cargo"
+                    value={formData.cargo}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white"
+                  >
                     <option value="">{t.form.cargoOptions.select}</option>
                     <option value="frigo">{t.form.cargoOptions.frigo}</option>
                     <option value="dry">{t.form.cargoOptions.dry}</option>
@@ -105,11 +196,75 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">{t.form.message}</label>
-                <textarea rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"></textarea>
+                <textarea 
+                  rows={4} 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                ></textarea>
               </div>
 
-              <button type="submit" className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-md">
-                {t.form.submit}
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-2">
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <p className="text-green-800 text-sm">
+                    {lang === 'bg'
+                      ? 'Вашето запитване е изпратено успешно! Ще се свържем с вас скоро.'
+                      : lang === 'en-GB'
+                      ? 'Your inquiry has been sent successfully! We will contact you soon.'
+                      : lang === 'pl'
+                      ? 'Twoje zapytanie zostało wysłane pomyślnie! Skontaktujemy się z Tobą wkrótce.'
+                      : lang === 'el'
+                      ? 'Το αίτημά σας στάλθηκε με επιτυχία! Θα επικοινωνήσουμε μαζί σας σύντομα.'
+                      : 'Your inquiry has been sent successfully! We will contact you soon.'}
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-2">
+                  <X className="h-5 w-5 text-red-600" />
+                  <p className="text-red-800 text-sm">
+                    {errorMessage || (
+                      lang === 'bg'
+                        ? 'Възникна грешка при изпращане. Моля, опитайте отново.'
+                        : lang === 'en-GB'
+                        ? 'An error occurred while sending. Please try again.'
+                        : lang === 'pl'
+                        ? 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie.'
+                        : lang === 'el'
+                        ? 'Παρουσιάστηκε σφάλμα κατά την αποστολή. Παρακαλώ δοκιμάστε ξανά.'
+                        : 'An error occurred while sending. Please try again.')}
+                  </p>
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-md disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span>
+                      {lang === 'bg'
+                        ? 'Изпращане...'
+                        : lang === 'en-GB'
+                        ? 'Sending...'
+                        : lang === 'pl'
+                        ? 'Wysyłanie...'
+                        : lang === 'el'
+                        ? 'Αποστολή...'
+                        : 'Sending...'}
+                    </span>
+                  </>
+                ) : (
+                  <span>{t.form.submit}</span>
+                )}
               </button>
             </form>
           </div>

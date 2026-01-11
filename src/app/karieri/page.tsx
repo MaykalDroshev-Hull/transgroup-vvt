@@ -97,9 +97,12 @@ export default function Karieri() {
                       </span>
                     </div>
                   </div>
-                  <button className="mt-4 lg:mt-0 bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                  <a 
+                    href="mailto:transgroupvvt@gmail.com" 
+                    className="mt-4 lg:mt-0 bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-block text-center"
+                  >
                     {t.labels.apply}
-                  </button>
+                  </a>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -157,9 +160,12 @@ export default function Karieri() {
             <p className="text-lg text-gray-600 mb-6">
               {t.cta.text}
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors shadow-lg">
+            <a 
+              href="mailto:transgroupvvt@gmail.com" 
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors shadow-lg inline-block"
+            >
               {t.cta.button}
-            </button>
+            </a>
           </div>
         </div>
       </section>
